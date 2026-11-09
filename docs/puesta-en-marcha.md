@@ -7,20 +7,20 @@
 3. Abrir la URL que muestra Vite. El navegador conserva datos de prueba; Configuración permite reiniciarlos.
 4. Para pruebas E2E instalar el navegador una vez: `npx playwright install chromium`.
 
-## GitHub: acciones pendientes de acceso autenticado
+## GitHub: base publicada
 
-Los archivos de automatización ya están preparados. Publicar la rama de base y develop, abrir PR de la primera hacia develop y pedir revisión de Liam. No integrar automáticamente ni saltar la revisión porque Johan sea el autor.
+Las ramas develop y feature/TEC-01-base-aplicacion están publicadas. El [PR borrador #1](https://github.com/JohanCerdas/Gestion-de-equipos-ULACIT-/pull/1) propone integrar la base en develop. Solicitar revisión a Liam cuando tenga acceso al repositorio. No saltar la revisión porque Johan sea el autor.
 
 ```bash
 git push -u origin develop
 git push -u origin feature/TEC-01-base-aplicacion
 ```
 
-Después de publicar, abrir un PR con base `develop` y comparación `feature/TEC-01-base-aplicacion`.
+Los comandos anteriores sirven para publicar nuevos commits en las ramas existentes. El PR ya está abierto.
 
 ## Protección de ramas
 
-Para `main` y `develop`: exigir PR, al menos una aprobación, resolver conversaciones, descartar aprobaciones obsoletas y exigir el check `quality` cuando aparezca tras el primer workflow. Bloquear force push y eliminación. Mantener squash merge.
+Ya configurado en `main` y `develop`: PR obligatorio, al menos una aprobación, conversaciones resueltas, descarte de aprobaciones obsoletas y check `quality` con rama actualizada. Force push y eliminación bloqueados; historial lineal. La protección también aplica a administradores. Integrar los PR con squash merge.
 
 CODEOWNERS propone a Johan como revisor. No exigir aprobación exclusiva de ese único code owner para sus propios PR: necesita que otro integrante pueda aprobarlos. Añadir los usuarios GitHub de los compañeros cuando se conozcan.
 
