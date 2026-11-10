@@ -1,0 +1,13 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Iniciar aplicación",
+      "type": "npm",
+      "script": "dev",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    { "label": "Validar proyecto", "type": "npm", "script": "check", "problemMatcher": [] }
+  ]
+}
