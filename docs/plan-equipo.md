@@ -10,12 +10,12 @@ La aplicación todavía no tiene usuarios reales ni conexión operativa a Supaba
 
 Johan asume aproximadamente 40%; Liam, Fabricio y Jhon, 20% cada uno. Es una estimación de responsabilidad y complejidad para planificar, no una medición de horas ni de calificación.
 
-| Integrante                             | Entregables y límites                                                                                                                                                                                                                                                                                                       |
-| -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Johan Cerdas · PM e integración        | Arquitectura compartida; separación de módulos; creación de ambientes Supabase; revisión y aplicación de migraciones; RPC y seguridad transaccional; adaptador de datos; RLS; integración continua; despliegue; integración de módulos; pruebas de concurrencia y flujo completo; revisión de PR; consolidación de calidad. |
-| Liam Carrillo · acceso y catálogo      | Inicio/cierre de sesión, manejo de sesión vencida y perfiles; formularios de alta/edición de equipos, filtros y mantenimiento; conexión de su módulo a los servicios de Johan; pruebas unitarias y E2E de acceso y catálogo; documentación. No permitir que la interfaz otorgue roles.                                      |
-| Fabricio Sánchez · PO y reservas       | Validar reglas; priorizar backlog con Johan; disponibilidad por intervalo, crear/modificar/cancelar reservas, mensajes de conflicto y estados vacíos; consumir las RPC de Johan; pruebas de límites, cancelación y edición; documentación de criterios.                                                                     |
-| Jhon Wright · préstamos y devoluciones | Pantallas de entrega, devolución y detalle del préstamo; historial con filtros; comprobación de condición y observaciones; consumir RPC de Johan; pruebas de duplicados, daños y estados; documentación de uso.                                                                                                             |
+| Integrante                             | Entregables y límites                                                                                                                                                                                                                                                                                                                   |
+| -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Johan Cerdas · PM e integración        | Arquitectura compartida; separación de módulos; creación de ambientes Supabase; revisión y aplicación de migraciones; RPC y seguridad transaccional; adaptador de datos; RLS; integración continua; despliegue; integración de módulos; pruebas de concurrencia y flujo completo; revisión del PR de entrega; consolidación de calidad. |
+| Liam Carrillo · acceso y catálogo      | Inicio/cierre de sesión, manejo de sesión vencida y perfiles; formularios de alta/edición de equipos, filtros y mantenimiento; conexión de su módulo a los servicios de Johan; pruebas unitarias y E2E de acceso y catálogo; documentación. No permitir que la interfaz otorgue roles.                                                  |
+| Fabricio Sánchez · PO y reservas       | Validar reglas; priorizar backlog con Johan; disponibilidad por intervalo, crear/modificar/cancelar reservas, mensajes de conflicto y estados vacíos; consumir las RPC de Johan; pruebas de límites, cancelación y edición; documentación de criterios.                                                                                 |
+| Jhon Wright · préstamos y devoluciones | Pantallas de entrega, devolución y detalle del préstamo; historial con filtros; comprobación de condición y observaciones; consumir RPC de Johan; pruebas de duplicados, daños y estados; documentación de uso.                                                                                                                         |
 
 Todos entregan implementación, casos de prueba, evidencias y documentación de su módulo. Johan no debe recibir funcionalidades sin pruebas para terminarlas por los demás.
 
@@ -25,12 +25,12 @@ Todos entregan implementación, casos de prueba, evidencias y documentación de 
 
 | ID     | Responsable       | Entrega verificable                                                           |
 | ------ | ----------------- | ----------------------------------------------------------------------------- |
-| TEC-01 | Johan             | Base actual en PR a develop; Liam revisa y aprueba.                           |
+| TEC-01 | Johan             | Base integrada en develop para el trabajo directo del equipo.                 |
 | TEC-02 | Johan             | Separar render y eventos por módulo; documentar interfaz del adaptador.       |
 | PO-01  | Fabricio + equipo | Confirmar reglas pendientes en arquitectura.md, roles, estados y alcance.     |
 | QA-01  | Todos             | Ejecutar localmente la demo y las pruebas; registrar problemas reproducibles. |
 
-No crear ramas de funcionalidad desde el develop vacío. Esperar a integrar TEC-01 o, si se necesita trabajar antes, usar una rama apilada y rebasarla después.
+Todos continúan directamente en develop con la base integrada.
 
 ### Etapa 2: infraestructura y módulos en paralelo
 
@@ -68,8 +68,13 @@ Los integrantes pueden construir formularios y pruebas usando la demo mientras J
 - Hasta extraer los módulos, evitar que todos editen `src/main.js`. Solicitar a Johan la integración de cada entrada.
 - No modificar migraciones ya aplicadas; agregar una nueva con identificador único.
 
-## Acuerdos Git
+## Flujo de trabajo: solo develop y main
 
-Una rama por historia, creada desde develop actualizado. No commits directos en main ni develop. Commits `feat:`, `fix:`, `test:` o `docs:`. PR pequeños con Issue, criterios, pruebas y evidencia. Johan revisa los PR de los compañeros; Liam revisa los de Johan. Fabricio valida comportamiento como PO. Squash merge después de aprobación y checks.
-
-La tarea no está terminada al abrir el PR: debe estar aprobada, integrada, probada y documentada. Cada persona informa avances y bloqueos en el grupo; Johan actualiza el tablero Pendiente / En curso / En revisión / Terminado. Establecer fechas del siguiente bloque en la primera reunión, según el calendario real del curso.
+- Todos trabajan directamente en `develop`. Antes de empezar: `git switch develop` y `git pull --rebase origin develop`.
+- Después de probar sus cambios: `git add .`, `git commit -m "feat: describir cambio"` y `git push origin develop`.
+- Si otro compañero publicó cambios, ejecutar `git pull --rebase origin develop`, resolver conflictos y volver a probar antes de subir.
+- No se crean ramas individuales ni se requieren PR hacia develop.
+- Para entregar una versión se abre un PR de `develop` hacia `main`. Johan revisa los cambios y puede integrarlos sin aprobación ajena.
+- Las pruebas automáticas informan los resultados; no son un bloqueo obligatorio configurado en GitHub.
+- La publicación corresponde a main. El equipo debe revisar y probar antes de integrar.
+- Al integrar develop en main, usar **Create a merge commit** para conservar el historial compartido entre las dos ramas.

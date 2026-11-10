@@ -11,7 +11,7 @@ La validación local cubre la demostración JavaScript. No equivale a pruebas de
 - 4 pruebas Playwright: panel y búsqueda, persistencia/cancelación de reserva, devolución con daños y navegación móvil sin desbordamiento horizontal.
 - Revisión visual del panel principal.
 - Validación de GitHub Actions aprobada sobre el commit inicial de la base: https://github.com/JohanCerdas/Gestion-de-equipos-ULACIT-/actions/runs/42547338365
-- Ramas publicadas y PR borrador #1 abierto hacia develop. Main y develop protegidas con una aprobación y check quality obligatorios, incluso para administradores.
+- Flujo actualizado por solicitud de Johan: trabajo directo en develop y PR hacia main sin aprobaciones obligatorias ni checks bloqueantes.
 
 ## Dependencias
 
@@ -19,6 +19,6 @@ La validación local cubre la demostración JavaScript. No equivale a pruebas de
 
 ## Pendientes de infraestructura
 
-- Revisión humana y aprobación del PR #1; habilitar GitHub Pages cuando corresponda publicar main.
+- Habilitar GitHub Pages cuando corresponda publicar main.
 - Crear Supabase de desarrollo/final, aplicar migraciones, implementar RPC y verificar permisos con usuarios separados.
 - Integrar login, CRUD real, edición de reservas y adaptador de datos.

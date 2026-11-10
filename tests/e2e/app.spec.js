@@ -2,11 +2,9 @@ import { test, expect } from '@playwright/test';
 
 test('dashboard, catalog search and detail dialog', async ({ page }) => {
   await page.goto('/');
-  await expect(
-    page.getByRole('heading', { name: 'Cada recurso, en el lugar correcto.' }),
-  ).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Resumen general' })).toBeVisible();
   await page.screenshot({ path: 'test-results/preview-principal.png', fullPage: true });
-  await page.getByRole('link', { name: 'Explorar equipos' }).click();
+  await page.getByRole('link', { name: 'Consultar equipos' }).click();
   await page.getByRole('textbox', { name: 'Buscar equipos' }).fill('Canon');
   // Search matches the visible name/code/category; search for the product name.
   await page.getByRole('textbox', { name: 'Buscar equipos' }).fill('EOS');
@@ -51,7 +49,7 @@ test('mobile navigation and layout', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('button', { name: 'Abrir navegación' }).click();
   await page.getByRole('link', { name: 'Equipos 8' }).click();
-  await expect(page.getByRole('heading', { name: 'Un equipo para cada idea.' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Equipos' })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(
     true,
   );

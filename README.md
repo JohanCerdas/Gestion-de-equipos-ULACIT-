@@ -34,17 +34,16 @@ npx playwright install chromium
 npm run test:e2e
 ```
 
-## Ramas y revisión
+## Flujo de trabajo: solo develop y main
 
-`feature/TEC-01-base-aplicacion` contiene la base. `develop` parte del commit inicial; la base debe integrarse mediante PR aprobado por otra persona antes de crear las ramas de los módulos. `main` conserva la versión publicada.
-
-1. Crear cada rama desde `develop` actualizado, después de integrar la base.
-2. Usar `feature/US-XX-descripcion`, `fix/BUG-XX-descripcion`, `test/...` o `docs/...`.
-3. Abrir PR hacia `develop`, con Issue, pruebas y evidencias.
-4. Johan revisa los PR de sus compañeros. Liam revisa los de Johan; Fabricio valida criterios funcionales.
-5. Integrar con squash. Publicar una entrega mediante PR de `develop` a `main`.
-
-La protección de ramas y la configuración de GitHub Pages son ajustes del repositorio: incluir archivos YAML no los activa por sí solo. Seguir `docs/puesta-en-marcha.md`.
+- Todos trabajan directamente en `develop`. Antes de empezar: `git switch develop` y `git pull --rebase origin develop`.
+- Después de probar sus cambios: `git add .`, `git commit -m "feat: describir cambio"` y `git push origin develop`.
+- Si otro compañero publicó cambios, ejecutar `git pull --rebase origin develop`, resolver conflictos y volver a probar antes de subir.
+- No se crean ramas individuales ni se requieren PR hacia develop.
+- Para entregar una versión se abre un PR de `develop` hacia `main`. Johan revisa los cambios y puede integrarlos sin aprobación ajena.
+- Las pruebas automáticas informan los resultados; no son un bloqueo obligatorio configurado en GitHub.
+- La publicación corresponde a main. El equipo debe revisar y probar antes de integrar.
+- Al integrar develop en main, usar **Create a merge commit** para conservar el historial compartido entre las dos ramas.
 
 ## Documentación
 

@@ -144,7 +144,7 @@ function render() {
       <div class="workspace">${icon('graduation-cap')}<div>Campus universitario<small>Centro de recursos</small></div><span class="online-dot"></span></div>
       <p class="nav-label">ESPACIO DE TRABAJO</p>
       <nav>${navItem('dashboard', 'Vista general', 'layout-dashboard')}${navItem('equipos', 'Equipos', 'laptop', state.equipment.length)}${navItem('reservas', 'Reservas', 'calendar-days')}${navItem('prestamos', 'Préstamos', 'arrow-left-right')}${navItem('historial', 'Historial', 'history')}</nav>
-      <div class="sidebar-bottom"><div class="support-card">${icon('shield-check')}<strong>Todo en su lugar.</strong><p>Recursos compartidos,<br/>posibilidades infinitas.</p></div>${navItem('configuracion', 'Configuración', 'settings')}<div class="profile"><span class="avatar">JC</span><div>Johan Cerdas<small>Administrador · Demo</small></div><span class="profile-dot"></span></div></div>
+      <div class="sidebar-bottom"><div class="support-card">${icon('shield-check')}<strong>Gestión institucional</strong><p>Control de reservas,<br/>préstamos y devoluciones.</p></div>${navItem('configuracion', 'Configuración', 'settings')}<div class="profile"><span class="avatar">JC</span><div>Johan Cerdas<small>Administrador · Demo</small></div><span class="profile-dot"></span></div></div>
     </aside>
     <div class="sidebar-overlay" data-action="menu"></div>
     <div class="main-shell"><header class="topbar"><div class="breadcrumb"><button class="icon-button mobile-menu" data-action="menu" aria-label="Abrir navegación">${icon('menu')}</button><span>Espacio de trabajo</span>${icon('chevron-right')}<strong>${routes[route()]}</strong></div><div class="topbar-right"><span class="demo-indicator"><span></span>Vista de demostración</span><span class="top-avatar">JC</span></div></header>
@@ -172,11 +172,11 @@ function dashboard() {
     day: 'numeric',
     month: 'long',
   }).format(new Date());
-  return `${heading('TU CAMPUS, CONECTADO', 'Cada recurso, en el lugar correcto.', 'Administra los equipos y acompaña cada etapa de su uso.', `<div class="date-label">${icon('calendar-days')}${today}</div>`)}
-    <section class="welcome-card"><div class="welcome-content"><span class="small-label"><span></span>LISTOS PARA TU PRÓXIMA IDEA</span><h2>El equipo que necesitas.<br/>El momento que eliges.</h2><p>Consulta la disponibilidad y organiza tus reservas<br class="desktop-only"/> en un solo espacio.</p><div class="hero-buttons">${newButton()}<a class="text-button" href="#equipos">Explorar equipos ${icon('arrow-up-right')}</a></div></div><div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="floating-tag tag-top">${icon('circle-check')}Recursos disponibles</div><div class="laptop-art"><div class="laptop-screen"><div class="screen-top"><span></span><span></span><span></span></div><div class="screen-content"><div class="screen-emblem">U<span>◆</span></div><div class="screen-lines"><i></i><i></i><i></i></div></div></div><div class="laptop-base"></div></div><div class="floating-tag tag-bottom">${icon('calendar-check')}Todo bajo control</div><div class="art-spark">✦</div></div></section>
-    <section class="stats-grid" aria-label="Resumen de recursos">${stat('Equipos disponibles', available, `${state.equipment.length} equipos en el inventario`, 'laptop', 'green')}${stat('Reservas activas', active.length, 'Próximos espacios reservados', 'calendar-days', 'purple')}${stat('Préstamos en curso', loans.length, 'Equipos fuera del centro', 'arrow-left-right', 'blue')}${stat('En mantenimiento', maintenance, 'En revisión técnica', 'wrench', 'amber')}</section>
-    <div class="dashboard-columns"><section class="panel reservations-panel"><div class="section-heading"><div><h2>Próximas reservas <span class="count-pill">${active.length}</span></h2><p>Un vistazo a lo que viene.</p></div><a href="#reservas" class="subtle-link">Ver todas ${icon('arrow-right')}</a></div>${reservationTable(active.slice(0, 4), true)}</section><section class="panel activity-panel"><div class="section-heading"><div><h2>Actividad reciente</h2><p>Los últimos movimientos.</p></div><span class="live-dot"></span></div>${activityList(state.activity.slice(0, 3))}<a class="activity-footer" href="#historial">Ver todo el historial ${icon('arrow-right')}</a></section></div>
-    <section class="featured-section"><div class="section-heading"><div><h2>Encuentra tu próximo equipo</h2><p>Herramientas para llevar tus ideas más lejos.</p></div><a href="#equipos" class="subtle-link">Ver catálogo ${icon('arrow-right')}</a></div><div class="equipment-grid featured">${state.equipment.slice(0, 4).map(equipmentCard).join('')}</div></section>`;
+  return `${heading('GESTIÓN DE EQUIPOS', 'Resumen general', 'Estado del inventario, reservas y préstamos registrados.', `<div class="date-label">${icon('calendar-days')}${today}</div>`)}
+    <section class="welcome-card"><div class="welcome-content"><span class="small-label"><span></span>GESTIÓN DE RESERVAS</span><p>Consulta de disponibilidad y registro de reservas.</p><div class="hero-buttons">${newButton()}<a class="text-button" href="#equipos">Consultar equipos ${icon('arrow-up-right')}</a></div></div><div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="floating-tag tag-top">${icon('circle-check')}Recursos disponibles</div><div class="laptop-art"><div class="laptop-screen"><div class="screen-top"><span></span><span></span><span></span></div><div class="screen-content"><div class="screen-emblem">U<span>◆</span></div><div class="screen-lines"><i></i><i></i><i></i></div></div></div><div class="laptop-base"></div></div><div class="floating-tag tag-bottom">${icon('calendar-check')}Registro de reservas</div><div class="art-spark">✦</div></div></section>
+    <section class="stats-grid" aria-label="Resumen de recursos">${stat('Equipos disponibles', available, `${state.equipment.length} equipos en el inventario`, 'laptop', 'green')}${stat('Reservas activas', active.length, 'Reservas pendientes de entrega', 'calendar-days', 'purple')}${stat('Préstamos en curso', loans.length, 'Equipos fuera del centro', 'arrow-left-right', 'blue')}${stat('En mantenimiento', maintenance, 'En revisión técnica', 'wrench', 'amber')}</section>
+    <div class="dashboard-columns"><section class="panel reservations-panel"><div class="section-heading"><div><h2>Próximas reservas <span class="count-pill">${active.length}</span></h2><p>Reservas activas ordenadas por fecha.</p></div><a href="#reservas" class="subtle-link">Ver todas ${icon('arrow-right')}</a></div>${reservationTable(active.slice(0, 4), true)}</section><section class="panel activity-panel"><div class="section-heading"><div><h2>Actividad reciente</h2><p>Operaciones registradas recientemente.</p></div><span class="live-dot"></span></div>${activityList(state.activity.slice(0, 3))}<a class="activity-footer" href="#historial">Ver todo el historial ${icon('arrow-right')}</a></section></div>
+    <section class="featured-section"><div class="section-heading"><div><h2>Catálogo de equipos</h2><p>Equipos registrados y estado actual.</p></div><a href="#equipos" class="subtle-link">Ver catálogo ${icon('arrow-right')}</a></div><div class="equipment-grid featured">${state.equipment.slice(0, 4).map(equipmentCard).join('')}</div></section>`;
 }
 function stat(title, value, caption, glyph, tone) {
   return `<article class="stat-card"><div><p>${title}</p><strong>${String(value).padStart(2, '0')}</strong><small>${caption}</small></div><span class="stat-icon ${tone}">${icon(glyph)}</span></article>`;
@@ -188,8 +188,8 @@ function equipmentCard(item) {
 function reservationTable(items, compact = false) {
   if (!items.length)
     return emptyState(
-      'Sin reservas por aquí',
-      'Crea una reserva para organizar el uso de un equipo.',
+      'Sin reservas registradas',
+      'No hay reservas que coincidan con la selección actual.',
     );
   return `<div class="table-scroll"><table><thead><tr><th>Equipo / Responsable</th><th>Fecha y horario</th><th>Estado</th>${compact ? '' : '<th>Acciones</th>'}</tr></thead><tbody>${items
     .map((r) => {
@@ -211,7 +211,7 @@ function equipos() {
       (statusFilter === 'all' || equipmentStatus(state, item) === statusFilter) &&
       `${item.name} ${item.id} ${item.category}`.toLowerCase().includes(search.toLowerCase()),
   );
-  return `${heading('CENTRO DE RECURSOS', 'Un equipo para cada idea.', 'Explora el catálogo y encuentra lo que necesitas.', newButton())}<section class="catalog-toolbar"><div class="search-field">${icon('search')}<input id="equipment-search" aria-label="Buscar equipos" placeholder="Buscar por nombre, código o categoría…" value="${e(search)}" /></div><label class="select-field">${icon('sliders-horizontal')}<select id="status-filter" aria-label="Filtrar por estado"><option value="all">Todos los estados</option>${[
+  return `${heading('CENTRO DE RECURSOS', 'Equipos', 'Consulta del inventario por nombre, categoría y estado.', newButton())}<section class="catalog-toolbar"><div class="search-field">${icon('search')}<input id="equipment-search" aria-label="Buscar equipos" placeholder="Buscar por nombre, código o categoría…" value="${e(search)}" /></div><label class="select-field">${icon('sliders-horizontal')}<select id="status-filter" aria-label="Filtrar por estado"><option value="all">Todos los estados</option>${[
     ['available', 'Disponibles'],
     ['loaned', 'Prestados'],
     ['maintenance', 'Mantenimiento'],
@@ -228,7 +228,7 @@ function reservas() {
   const items = state.reservations
     .filter((r) => reservationFilter === 'all' || r.status === reservationFilter)
     .sort((a, b) => new Date(a.start) - new Date(b.start));
-  return `${heading('PLANIFICA CON TIEMPO', 'Reservas', 'Organiza horarios, evita conflictos y prepara la próxima entrega.', newButton())}<section class="panel"><div class="tabs panel-tabs">${[
+  return `${heading('GESTIÓN DE RESERVAS', 'Reservas', 'Registro, consulta y cancelación de reservas de equipos.', newButton())}<section class="panel"><div class="tabs panel-tabs">${[
     ['active', 'Activas'],
     ['fulfilled', 'Entregadas'],
     ['cancelled', 'Canceladas'],
@@ -244,7 +244,7 @@ function reservas() {
 }
 function prestamos() {
   const items = state.loans.filter((l) => l.status === loanFilter);
-  return `${heading('CADA ENTREGA CUENTA', 'Préstamos y devoluciones', 'Da seguimiento a los equipos y registra su regreso.', `<a class="button secondary" href="#reservas">${icon('calendar-days')}Ir a reservas</a>`)}<section class="panel"><div class="tabs panel-tabs">${[
+  return `${heading('CONTROL DE EQUIPOS', 'Préstamos y devoluciones', 'Consulta de préstamos activos y registro de devoluciones.', `<a class="button secondary" href="#reservas">${icon('calendar-days')}Ir a reservas</a>`)}<section class="panel"><div class="tabs panel-tabs">${[
     ['active', 'En curso'],
     ['returned', 'Devueltos'],
   ]
@@ -260,14 +260,14 @@ function prestamos() {
             return `<tr><td><div class="table-resource"><span class="resource-icon ${eq.color}">${icon(eq.icon)}</span><div><strong>${e(eq.name)}</strong><small>${e(l.person)} · ${l.id}</small></div></div></td><td><strong>${formatDate(l.due)}</strong><small>${formatTime(l.due)}</small></td><td>${l.status === 'returned' ? badge('returned') : new Date(l.due) < new Date() ? '<span class="badge amber"><span></span>Por devolver</span>' : badge('loaned')}</td><td>${l.status === 'active' ? `<button class="small-button" data-action="return" data-id="${l.id}">Registrar devolución</button>` : `<span class="muted">${l.returnCondition === 'damaged' ? 'Con daños' : 'Buen estado'}</span>`}</td></tr>`;
           })
           .join('')}</tbody></table></div>`
-      : emptyState('Todo al día', 'No hay préstamos en esta sección.')
+      : emptyState('Sin préstamos registrados', 'No hay préstamos en esta sección.')
   }</section>`;
 }
 function historial() {
-  return `${heading('TRAZABILIDAD', 'El recorrido de cada equipo.', 'Consulta las operaciones registradas en esta demostración.', `<button class="button secondary" data-action="export">${icon('download')}Exportar CSV</button>`)}<section class="panel full-history">${activityList(state.activity)}</section>`;
+  return `${heading('TRAZABILIDAD', 'Historial de movimientos', 'Registro de reservas, entregas y devoluciones de equipos.', `<button class="button secondary" data-action="export">${icon('download')}Exportar CSV</button>`)}<section class="panel full-history">${activityList(state.activity)}</section>`;
 }
 function configuracion() {
-  return `${heading('TU ESPACIO DE TRABAJO', 'Configuración', 'Información de la versión y datos de demostración.')}<section class="panel settings-panel"><span class="settings-icon">${icon('monitor')}</span><h2>Una base para construir en equipo.</h2><p>Estás utilizando una vista de demostración con datos ficticios que se guardan únicamente en este navegador. Puedes crear reservas, registrar entregas y devoluciones y explorar el catálogo.</p><div class="settings-facts"><div><small>VERSIÓN</small><strong>0.1.0 · Base del proyecto</strong></div><div><small>PERFIL DE DEMOSTRACIÓN</small><strong>Johan Cerdas · Administrador</strong></div><div><small>ALMACENAMIENTO</small><strong>Local a este navegador</strong></div></div><div class="info-note">El inicio de sesión y la conexión a Supabase son parte de la siguiente etapa. Este perfil de demostración no autentica usuarios reales.</div><button class="button secondary" data-action="reset">${icon('rotate-ccw')}Restablecer datos de prueba</button></section>`;
+  return `${heading('ADMINISTRACIÓN', 'Configuración', 'Información de la versión y datos de demostración.')}<section class="panel settings-panel"><span class="settings-icon">${icon('monitor')}</span><h2>Información del sistema</h2><div class="settings-facts"><div><small>VERSIÓN</small><strong>0.1.0 · Base del proyecto</strong></div><div><small>PERFIL DE DEMOSTRACIÓN</small><strong>Johan Cerdas · Administrador</strong></div><div><small>ALMACENAMIENTO</small><strong>Local a este navegador</strong></div></div><div class="info-note">El inicio de sesión y la conexión a Supabase son parte de la siguiente etapa. Este perfil de demostración no autentica usuarios reales.</div><button class="button secondary" data-action="reset">${icon('rotate-ccw')}Restablecer datos de prueba</button></section>`;
 }
 
 function showModal(title, content) {
@@ -283,7 +283,7 @@ function reserveDialog(equipmentId = '') {
   const end = new Date(+start + 7200000);
   showModal(
     'Nueva reserva',
-    `<p class="modal-description">Aparta un equipo para tu próxima actividad.</p><form id="reserve-form"><label>Equipo<select name="equipmentId" required><option value="">Selecciona un equipo</option>${state.equipment
+    `<p class="modal-description">Complete los datos para registrar una reserva.</p><form id="reserve-form"><label>Equipo<select name="equipmentId" required><option value="">Selecciona un equipo</option>${state.equipment
       .filter((item) => equipmentStatus(state, item) === 'available')
       .map(
         (item) =>
